@@ -43,6 +43,7 @@ But it doesnot give us the nice properties we want:
 3. It cannot resolve the case of multiple countries like "Shanghai - New York"
 ### LLM
 We can simply pass the answer to LLMs like Chatgpt, and ask if they know the address. Compare to Geopy, this approach have more "common sense"; it wouldn't mistake "Earth" as an actual address. On the other hand, Geopy is cheaper (free with 1 request per second), and it works better when then address is just a street name. 
+A little update on 2025.05.12: We can use fucntion calling api of OpenAI now to make sure the output country is exacly the same spelling, capitalization and stuff. 
 
 ### Hybrid Approach
 What we did eventually, is we first pass address to Geopy, and for those Geopy cannot identify, we pass it to LLM. This is the most economic way. 
