@@ -1,5 +1,8 @@
 # IdentifyCountry
-Given an address, identify which country is this address in. 
+Given an address, identify which country is this address in. For examples just look at Examples.ipynb. 
+
+1. *GeopyAPI.py* and *LLMDecodeLocation.py* are the two possible approaches.
+2. *getGeopyCountryNames.py* is just a web scraper that extract all the country names from Nominatim's wiki page. 
 
 ## Problem Description
 This problem can be viewed as a classification problem: the input is a string that might (or might not) be an address, the output is one (or more) of the 195 countries there are currently in the world. Let's not get political here regarding the country name and stuff. 
