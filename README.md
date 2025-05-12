@@ -39,15 +39,15 @@ We start by uing *Geopy*, This is basically a powerful tool that given a string,
     https://geopy.readthedocs.io/en/stable/
 But it doesnot give us the nice properties we want:
 1. If there are at least one possible match, then Geopy will always return the results. We migitate this by setting a rule: if there are more than 3 possible matches in the results of Geopy, then we will label this location as "Ambiguous".
-2. When the address is not ambiguous, sometimes the accuracy of Geopy is not ideal. Most common confusion pair (in context of a confusion matrix) is when the address is clarly Not_An_Address, like "Earth", Geopy still returns a location becuase somewhere there is a place name with "Earth" in it. But the other direction is not a problem: for most of the address string that is clearly in an actual Country, Geopy can usually find the country. 
+2. When the address is not ambiguous, sometimes the accuracy of Geopy is not ideal. Most common confusion pair (in context of a confusion matrix) is when the address is clarly Not_An_Address, like "Earth", Geopy still returns a location becuase somewhere there is a place name with "Earth" in it. But the other direction is not a problem: for most of the address string that is clearly in an actual Country, Geopy can usually find the country.
+3. It cannot resolve the case of multiple countries like "Shanghai - New York"
 ### LLM
 We can simply pass the answer to LLMs like Chatgpt, and ask if they know the address. Compare to Geopy, this approach have more "common sense"; it wouldn't mistake "Earth" as an actual address. On the other hand, Geopy is cheaper (free with 1 request per second), and it works better when then address is just a street name. 
 
 ### Hybrid Approach
 What we did eventually, is we first pass address to Geopy, and for those Geopy cannot identify, we pass it to LLM. This is the most economic way. 
 
-However, the more reasonable approach should be first passing to LLM, resolve all the ones that is clear, and then pass it to Geopy, so that it will not misclassify. 
-
+What is the best way? 
 
 ## Method Evaluation
 Based on our definition, "Ambiguous" is a binary classification, so we will evaluate it using TN/FN. And then the rest of the classification is essentially a multi-class classification, so we will evaluate it using accuracy. 
